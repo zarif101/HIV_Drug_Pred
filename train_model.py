@@ -4,7 +4,7 @@ from util import get_data,SmilesDataset
 from models import ModelOne
 import time
 import warnings
-
+from sklearn.metrics import accuracy_score
 warnings.filterwarnings("ignore")
 
 X_train,X_test,y_train,y_test = get_data('data/HIV.csv',split=True,test_size=0.19)
@@ -14,8 +14,8 @@ test_dataset = SmilesDataset(X_test,y_test,410)
 train_loader = DataLoader(train_dataset,batch_size=10,shuffle=True)
 test_loader = DataLoader(test_dataset,batch_size=1,shuffle=False)
 
-NUM_EPOCHS = 10
-STEPS_PER_EPOCH = 1000
+NUM_EPOCHS = 1
+STEPS_PER_EPOCH = 1
 model = ModelOne(1,1)
 criterion = torch.nn.BCELoss()
 optimizer = torch.optim.Adam(params=model.parameters())
@@ -36,6 +36,21 @@ def train_step():
         optimizer.step()
         total_loss_this_step+=loss
     return total_loss_this_step/len(train_loader.dataset) #Returning average loss for this epoch
+def test():
+    preds = []
+    truths = []
+    for i,data in enumerate(test_loader):
+        features,labels = data
+        features = features.reshape((1,410))
+        pred = model(features).detach().numpy()[0][0]
+        labels = labels.detach().numpy()[0]
+        truths.append(labels)
+        if pred >= 0.5:
+            preds.append(1)
+        else:
+            preds.append(0)
+    acc = accuracy_score(truths,preds)
+    return acc
 
 # Main issue right now: DeepChem has a stupid and useless warning it keeps tossing, which SEVERELY clogs up the console during training
 # I'm going to try to suppress it, but if that doesn't work, I'll probably write trainings history/info to a file while looking for a better solution
@@ -48,5 +63,7 @@ if __name__ == '__main__':
         train_loss = train_step()
         print('Average loss: '+str(train_loss))
         f.write('Epoch '+str(e)+'...Train Loss: '+str(train_loss.detach().numpy())+'\n')
+        acc = test()
+        print(acc)
     f.close()
         #time.sleep(10)
