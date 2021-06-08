@@ -15,13 +15,15 @@ train_loader = DataLoader(train_dataset,batch_size=10,shuffle=True)
 test_loader = DataLoader(test_dataset,batch_size=1,shuffle=False)
 
 NUM_EPOCHS = 10
+STEPS_PER_EPOCH = 1000
 model = ModelOne(1,1)
 criterion = torch.nn.BCELoss()
 optimizer = torch.optim.Adam(params=model.parameters())
 
 def train_step():
     total_loss_this_step = 0
-    for data in train_loader:
+    #for data in train_loader:
+    for i in range(STEPS_PER_EPOCH):
         features,labels = next(iter(train_loader))
         #print(features.shape)
         features = features.reshape((10,410))
@@ -45,6 +47,6 @@ if __name__ == '__main__':
         e+=1
         train_loss = train_step()
         print('Average loss: '+str(train_loss))
-        f.write('Epoch '+str(e)+'...Train Loss: '+str(train_loss))
+        f.write('Epoch '+str(e)+'...Train Loss: '+str(train_loss.detach().numpy())+'\n')
     f.close()
         #time.sleep(10)
