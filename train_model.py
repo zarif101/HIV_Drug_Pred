@@ -3,6 +3,9 @@ from torch.utils.data import DataLoader
 from util import get_data,SmilesDataset
 from models import ModelOne
 import time
+import warnings
+
+warnings.filterwarnings("ignore")
 
 X_train,X_test,y_train,y_test = get_data('data/HIV.csv',split=True,test_size=0.19)
 train_dataset = SmilesDataset(X_train,y_train,410)
@@ -36,7 +39,12 @@ def train_step():
 # I'm going to try to suppress it, but if that doesn't work, I'll probably write trainings history/info to a file while looking for a better solution
 
 if __name__ == '__main__':
+    e = 0
+    f = open('model_training_history.txt','a')
     for epoch in range(NUM_EPOCHS):
+        e+=1
         train_loss = train_step()
         print('Average loss: '+str(train_loss))
+        f.write('Epoch '+str(e)+'...Train Loss: '+str(train_loss))
+    f.close()
         #time.sleep(10)
