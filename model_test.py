@@ -10,7 +10,7 @@ def main():
     feat,target = train_dataset.__getitem__(1)
     model = ModelOne(1,1) # these 1s are temporary bc right now they aren't doing anything in ModelOne
     out = model(feat)
-    print(out)
-
+    assert out.shape == (1,1)
+    print('All tests passed!')
 if __name__ == '__main__':
     main()
