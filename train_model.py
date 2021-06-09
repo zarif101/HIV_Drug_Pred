@@ -1,6 +1,6 @@
 import torch
-from torch.utils.data import DataLoader
-from util import get_data,SmilesDataset
+from torch.utils.data import DataLoader,WeightedRandomSampler
+from util import get_data,SmilesDataset,get_random_data_sampler_weights
 from models import ModelOne
 import time
 import warnings
@@ -11,8 +11,18 @@ X_train,X_test,y_train,y_test = get_data('data/HIV.csv',split=True,test_size=0.1
 train_dataset = SmilesDataset(X_train,y_train,410)
 test_dataset = SmilesDataset(X_test,y_test,410)
 
-train_loader = DataLoader(train_dataset,batch_size=10,shuffle=True)
-test_loader = DataLoader(test_dataset,batch_size=1,shuffle=False)
+# Weighted random data sampler to try to address class imbalance
+train_random_weights = get_random_data_sampler_weights(y_train)
+test_random_weights = get_random_data_sampler_weights(y_test)
+
+train_sampler = WeightedRandomSampler(train_random_weights, len(train_random_weights))
+test_sampler = WeightedRandomSampler(test_random_weights, len(test_random_weights))
+
+train_loader = DataLoader(train_dataset,batch_size=10,shuffle=True,sampler=train_sampler)
+test_loader = DataLoader(test_dataset,batch_size=1,shuffle=False,sampler=test_sampler)
+
+#train_loader = DataLoader(train_dataset,batch_size=10,shuffle=True)
+#test_loader = DataLoader(test_dataset,batch_size=1,shuffle=False)
 
 NUM_EPOCHS = 1
 STEPS_PER_EPOCH = 1

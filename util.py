@@ -75,3 +75,12 @@ class SmilesDataset(Dataset):
         return new_smiles
 
 #def load_dataset(smiles_features,pad_len=410,vocab_path='data/smiles.txt'):
+
+def get_random_data_sampler_weights(y):
+    weights = []
+    for val in y:
+        if y == 0:
+            weights.append(0.3)
+        elif y == 1:   # There are way more 0s than 1s, so we want to oversample the 1s
+            weights.append(0.7)
+    return weights
