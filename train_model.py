@@ -4,7 +4,7 @@ from util import get_data,SmilesDataset,get_random_data_sampler_weights
 from models import ModelOne
 import time
 import warnings
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score,confusion_matrix
 warnings.filterwarnings("ignore")
 
 X_train,X_test,y_train,y_test = get_data('data/HIV.csv',split=True,test_size=0.19)
@@ -16,16 +16,16 @@ train_random_weights = get_random_data_sampler_weights(y_train)
 test_random_weights = get_random_data_sampler_weights(y_test)
 
 train_sampler = WeightedRandomSampler(train_random_weights, len(train_random_weights))
-test_sampler = WeightedRandomSampler(test_random_weights, len(test_random_weights))
+#test_sampler = WeightedRandomSampler(test_random_weights, len(test_random_weights))
 
-train_loader = DataLoader(train_dataset,batch_size=10,shuffle=True,sampler=train_sampler)
-test_loader = DataLoader(test_dataset,batch_size=1,shuffle=False,sampler=test_sampler)
+train_loader = DataLoader(train_dataset,batch_size=10,shuffle=False,sampler=train_sampler)
+test_loader = DataLoader(test_dataset,batch_size=1,shuffle=False)
 
 #train_loader = DataLoader(train_dataset,batch_size=10,shuffle=True)
 #test_loader = DataLoader(test_dataset,batch_size=1,shuffle=False)
 
-NUM_EPOCHS = 1
-STEPS_PER_EPOCH = 1
+NUM_EPOCHS = 10
+STEPS_PER_EPOCH = 10
 model = ModelOne(1,1)
 criterion = torch.nn.BCELoss()
 optimizer = torch.optim.Adam(params=model.parameters())
@@ -60,7 +60,8 @@ def test():
         else:
             preds.append(0)
     acc = accuracy_score(truths,preds)
-    return acc
+    cm = confusion_matrix(truths,preds)
+    return acc,cm
 
 # Main issue right now: DeepChem has a stupid and useless warning it keeps tossing, which SEVERELY clogs up the console during training
 # I'm going to try to suppress it, but if that doesn't work, I'll probably write trainings history/info to a file while looking for a better solution
@@ -72,8 +73,10 @@ if __name__ == '__main__':
         e+=1
         train_loss = train_step()
         print('Average loss: '+str(train_loss))
-        f.write('Epoch '+str(e)+'...Train Loss: '+str(train_loss.detach().numpy())+'\n')
-        acc = test()
+        f.write('Epoch '+str(e)+'...Train Loss: '+str(train_loss.detach().numpy()))
+        acc,confusion_m = test()
+        f.write(' ...Test Acc: '+str(acc)+'\n')
         print(acc)
+        print(confusion_m)
     f.close()
         #time.sleep(10)

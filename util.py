@@ -77,10 +77,11 @@ class SmilesDataset(Dataset):
 #def load_dataset(smiles_features,pad_len=410,vocab_path='data/smiles.txt'):
 
 def get_random_data_sampler_weights(y):
+    y = list(y)
     weights = []
     for val in y:
-        if y == 0:
-            weights.append(0.3)
-        elif y == 1:   # There are way more 0s than 1s, so we want to oversample the 1s
+        if val == 0:
+            weights.append(0.1)
+        elif val == 1:   # There are way more 0s than 1s, so we want to oversample the 1s
             weights.append(0.7)
     return weights

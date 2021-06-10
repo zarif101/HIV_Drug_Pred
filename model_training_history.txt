@@ -1,2 +1,30 @@
-Epoch 1...Train Loss: 2.0786236e-05
-Epoch 1...Train Loss: 2.037897e-05
+Epoch 1...Train Loss: 0.0001790494 ...Test Acc: 0.8084452975047984
+Epoch 2...Train Loss: 0.00014640378 ...Test Acc: 0.8
+Epoch 3...Train Loss: 0.00011000683 ...Test Acc: 0.8030710172744722
+Epoch 4...Train Loss: 0.00017247471 ...Test Acc: 0.8094689699296225
+Epoch 5...Train Loss: 0.00012939316 ...Test Acc: 0.8069097888675624
+Epoch 6...Train Loss: 0.00015701457 ...Test Acc: 0.7957773512476007
+Epoch 7...Train Loss: 0.00014393665 ...Test Acc: 0.8034548944337812
+Epoch 8...Train Loss: 0.00012879625 ...Test Acc: 0.8051183621241202
+Epoch 9...Train Loss: 0.00013628295 ...Test Acc: 0.8081893793985925
+Epoch 10...Train Loss: 0.00014727951 ...Test Acc: 0.8134357005758157
+Epoch 1...Train Loss: 0.0001538781 ...Test Acc: 0.7929622520793346
+Epoch 2...Train Loss: 0.00013038238 ...Test Acc: 0.7991042866282789
+Epoch 3...Train Loss: 0.00013248644 ...Test Acc: 0.798336532309661
+Epoch 4...Train Loss: 0.00016910576 ...Test Acc: 0.7939859245041587
+Epoch 5...Train Loss: 0.00017401123 ...Test Acc: 0.7979526551503519
+Epoch 6...Train Loss: 0.0001617283 ...Test Acc: 0.8019193857965451
+Epoch 7...Train Loss: 0.00013694525 ...Test Acc: 0.7933461292386437
+Epoch 8...Train Loss: 0.000107931526 ...Test Acc: 0.8014075495841331
+Epoch 9...Train Loss: 0.00014411112 ...Test Acc: 0.7948816378758797
+Epoch 10...Train Loss: 0.0001261851 ...Test Acc: 0.8048624440179143
+Epoch 1...Train Loss: 0.00017040399 ...Test Acc: 0.9676263595649393
+Epoch 2...Train Loss: 0.00013018443 ...Test Acc: 0.9676263595649393
+Epoch 3...Train Loss: 0.0001624037 ...Test Acc: 0.9674984005118362
+Epoch 4...Train Loss: 0.00014885716 ...Test Acc: 0.9653230966090851
+Epoch 5...Train Loss: 0.00014335754 ...Test Acc: 0.9587971849008318
+Epoch 6...Train Loss: 0.00013078144 ...Test Acc: 0.9579014715291106
+Epoch 7...Train Loss: 0.00013272902 ...Test Acc: 0.9575175943698017
+Epoch 8...Train Loss: 0.00015590683 ...Test Acc: 0.94638515674984
+Epoch 9...Train Loss: 0.00014987493 ...Test Acc: 0.9532949456174025
+Epoch 10...Train Loss: 0.0001568337 ...Test Acc: 0.9494561740243123
