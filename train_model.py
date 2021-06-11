@@ -1,7 +1,7 @@
 import torch
 from torch.utils.data import DataLoader,WeightedRandomSampler
 from util import get_data,SmilesDataset,get_random_data_sampler_weights
-from models import ModelOne
+from models import ModelOne,ModelTwo
 import time
 import warnings
 from sklearn.metrics import accuracy_score,confusion_matrix
@@ -25,8 +25,8 @@ test_loader = DataLoader(test_dataset,batch_size=1,shuffle=False)
 #test_loader = DataLoader(test_dataset,batch_size=1,shuffle=False)
 
 NUM_EPOCHS = 10
-STEPS_PER_EPOCH = 10
-model = ModelOne(1,1)
+STEPS_PER_EPOCH = 100
+model = ModelTwo(1,1)
 criterion = torch.nn.BCELoss()
 optimizer = torch.optim.Adam(params=model.parameters())
 
