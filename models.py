@@ -18,7 +18,7 @@ class ModelOne(nn.Module):
 
 class ModelTwo(nn.Module):
     def __init__(self,seq_length,vec_length):
-        super(ModelOne, self).__init__()
+        super(ModelTwo, self).__init__()
         self.embedding = nn.Embedding(591,20) #100 is embedding dim
         self.lstm = nn.LSTM(20,10) # 10 is LSTM dim
         self.linear = nn.Linear(4100,1)
