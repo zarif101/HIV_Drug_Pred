@@ -12,7 +12,7 @@ The model is created and trained using Pytorch, and the dataset (curated by the 
 - To deal with the class imbalance, I'm currently using the Pytorch WeightedRandomSampler
 - Util.py contains assorted helper functions
 - 'notebooks' is a folder containing notebook(s) for visualization the dataset, and in the future, I'll add some which go through the model training process
-- 'train_model.py' can be run to train the Pytorch model; test metrics will be printed out, and training history is saved in a .txt file
+- 'train_model.py' can be run to train the Pytorch model; test metrics will be printed out, and training history is saved in a .txt file; the .txt is called 'model_training_history.txt', and should be cleared out after each training run
 - Issue: Data preprocessing uses a library called DeepChem, which produces some useless console warnings, which is annoying and clogs up the terminal; I'm currently looking into workarounds or replacements
 - I'll update this project and documentation as I have time
 - Feel free to reach out to me via email at zarif.azher@gmail.com, or just open an issue right here on GitHub
