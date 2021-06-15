@@ -26,7 +26,7 @@ test_loader = DataLoader(test_dataset,batch_size=1,shuffle=False)
 
 NUM_EPOCHS = 10
 STEPS_PER_EPOCH = 100
-model = ModelTwo(1,1)
+model = ModelOne(1,1)
 criterion = torch.nn.BCELoss()
 optimizer = torch.optim.Adam(params=model.parameters())
 
